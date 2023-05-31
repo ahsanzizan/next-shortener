@@ -51,7 +51,7 @@ export default function Home({ data }) {
       <section className="py-10" id="contact">
         <div className="max-w-3xl xl:max-w-5xl px-2 mx-auto">
           <h1 className="text-center text-secondary font-semibold text-xl md:text-3xl mb-10">
-            <span className="text-main">ahsanzizan</span> - URL Shortener
+            <Link className="text-main hover:underline" href={"https://www.ahsanzizan.xyz/"} >ahsanzizan</Link> - URL Shortener
           </h1>
             <form ref={form} onSubmit={addLink} id="contact-form" className="w-full flex flex-col gap-5 text-black">
                 <div className="flex flex-col gap-2">
@@ -97,10 +97,10 @@ export default function Home({ data }) {
                                         return <tr key={i} className="border-b transition duration-300 ease-in-out">
                                             <td className="p-2 whitespace-nowrap text-sm font-semibold text-main">{i + 1}</td>
                                             <td className="text-sm text-main font-semibold px-6 py-4 whitespace-nowrap max-w-[210px] overflow-clip">
-                                                <span className="mb-2 block duration-300">{link.fullUrl}</span>
+                                                <Link className="mb-2 block hover:underline duration-300" href={`${link.fullUrl}`}>{link.fullUrl}</Link>
                                             </td>
                                             <td className="text-sm text-main font-semibold px-6 py-4 whitespace-nowrap max-w-[210px] overflow-clip">
-                                                <span className="mb-2 block duration-300">{link.shortUrl}</span>
+                                                <Link className="mb-2 block hover:underline duration-300" href={`/${link.shortUrl}`}>{link.shortUrl}</Link>
                                             </td>
                                             <td className="text-sm text-main font-semibold px-6 py-4 whitespace-nowrap">
                                                 {link.clicks}
