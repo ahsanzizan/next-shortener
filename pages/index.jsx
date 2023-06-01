@@ -70,7 +70,7 @@ export default function Home({ data }) {
         <div className="flex h-screen flex-col justify-between">
             <div className="flex flex-col">
                 <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <Link className="text-xl text-secondary bg-red-600 text-center py-2 font-semibold hover:bg-opacity-75 block mb-5" href={"/api/logout"}>Logout</Link>
+                    <Link className="text-xl text-secondary bg-red-600 text-center py-2 font-semibold hover:bg-opacity-75 block mb-5 max-w-[63.5rem] mx-auto" href={"/api/logout"}>Logout</Link>
                     <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                         <div className="py-5">
                             <table className="min-w-full bg-[#222831]">
