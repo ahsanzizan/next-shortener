@@ -56,11 +56,11 @@ export default function Home({ data }) {
           <form ref={form} onSubmit={addLink} className="w-full flex flex-col gap-5 text-black">
               <div className="flex flex-col gap-2">
                 <label htmlFor="fullUrl" className="font-bold text-lg text-main">Full URL</label>
-                <input type="url" placeholder="Name" className="text-gray-900 px-3 py-2 outline-2 focus:outline-main" name="fullUrl" required />
+                <input type="url" placeholder="URL" className="text-gray-900 px-3 py-2 outline-2 focus:outline-main" name="fullUrl" required />
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="shortUrl" className="font-bold text-lg text-main">Short URL</label>
-                <input type="text" placeholder="Email" className="text-gray-900 px-3 py-2 outline-2 focus:outline-main" name="shortUrl" required />
+                <input type="text" placeholder="Desired Short URL" className="text-gray-900 px-3 py-2 outline-2 focus:outline-main" name="shortUrl" required />
               </div>
               <input type="submit" value="Add New Link" className="w-full px-5 py-3 bg-main text-secondary font-semibold rounded cursor-pointer hover:bg-opacity-75" />
           </form>
