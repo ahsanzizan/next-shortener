@@ -48,28 +48,29 @@ export default function Home({ data }) {
   return (
     <main className="px-5">
       <Header title={"ahsanzizan - URL Shortener"} />
-      <section className="py-10" id="contact">
+      <section className="py-10">
         <div className="max-w-3xl xl:max-w-5xl px-2 mx-auto">
           <h1 className="text-center text-secondary font-semibold text-xl md:text-3xl mb-10">
             <Link className="text-main hover:underline" href={"https://www.ahsanzizan.xyz/"} >ahsanzizan</Link> - URL Shortener
           </h1>
-            <form ref={form} onSubmit={addLink} id="contact-form" className="w-full flex flex-col gap-5 text-black">
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="fullUrl" className="font-bold text-lg text-main">Full URL</label>
-                  <input type="url" placeholder="Name" className="text-gray-900 px-3 py-2 outline-2 focus:outline-main" name="fullUrl" required />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label htmlFor="shortUrl" className="font-bold text-lg text-main">Short URL</label>
-                  <input type="text" placeholder="Email" className="text-gray-900 px-3 py-2 outline-2 focus:outline-main" name="shortUrl" required />
-                </div>
-                <input type="submit" value="Add New Link" className="w-full px-5 py-3 bg-main text-secondary font-semibold rounded cursor-pointer hover:bg-opacity-75" />
-            </form>
+          <form ref={form} onSubmit={addLink} className="w-full flex flex-col gap-5 text-black">
+              <div className="flex flex-col gap-2">
+                <label htmlFor="fullUrl" className="font-bold text-lg text-main">Full URL</label>
+                <input type="url" placeholder="Name" className="text-gray-900 px-3 py-2 outline-2 focus:outline-main" name="fullUrl" required />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="shortUrl" className="font-bold text-lg text-main">Short URL</label>
+                <input type="text" placeholder="Email" className="text-gray-900 px-3 py-2 outline-2 focus:outline-main" name="shortUrl" required />
+              </div>
+              <input type="submit" value="Add New Link" className="w-full px-5 py-3 bg-main text-secondary font-semibold rounded cursor-pointer hover:bg-opacity-75" />
+          </form>
         </div>
       </section>
       <div className="mx-auto max-w-3xl px-2 xl:max-w-5xl">
         <div className="flex h-screen flex-col justify-between">
             <div className="flex flex-col">
                 <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <Link className="text-xl text-secondary bg-red-600 text-center py-2 font-semibold hover:bg-opacity-75 block mb-5" href={"/api/logout"}>Logout</Link>
                     <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                         <div className="py-5">
                             <table className="min-w-full bg-[#222831]">
