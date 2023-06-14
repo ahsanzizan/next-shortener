@@ -1,18 +1,468 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
 
 /* Change the white to any color */
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    -webkit-box-shadow: 0 0 0 30px #000 inset !important;
+    -webkit-text-fill-color: #fff;
 }
 
 @layer base {
-    body {
-        font-family: 'Poppins';
-    }
+  body {
+    font-family: sans-serif;
+    @apply bg-white;
+    margin: 0;
+    overflow-x: hidden;
+  }
+  
+  html {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+  }
+}
+
+/* Toast UI stuff */
+.toastui-editor-contents p, .toastui-editor-contents h1, .toastui-editor-contents h2, .toastui-editor-contents h3, .toastui-editor-contents h4, 
+.toastui-editor-contents h5, .toastui-editor-contents h6, .toastui-editor-contents li {
+  @apply tracking-wide no-underline;
+}
+
+.toastui-editor-contents p, .toastui-editor-contents code, .toastui-editor-contents li {
+  @apply text-base md:text-lg leading-5 my-3;
+}
+
+.toastui-editor-contents h1 {
+  @apply text-4xl;
+}
+
+.toastui-editor-contents h2 {
+  @apply text-3xl;
+}
+
+.toastui-editor-contents h3 {
+  @apply text-2xl;
+}
+
+.toastui-editor-contents h4 {
+  @apply text-xl;
+}
+
+.toastui-editor-contents strong {
+  @apply font-extrabold;
+}
+
+.toastui-editor-contents *[href] {
+  @apply no-underline transition duration-200;
+}
+
+/* toast ui end */
+
+.navbar {
+  @apply w-full hidden md:flex md:items-center md:w-auto gap-6;
+}
+
+#navbar {
+  transition: 0.3s;
+}
+
+.navbar a, .footer-link {
+  @apply relative;
+}
+
+.navbar a::after {
+  content: '';
+  @apply absolute bg-[#c8c8c8fc] h-[6px] w-0 left-0 bottom-2 -z-10;
+  transition: 0.3s;
+}
+
+.footer-link::after {
+  content: '';
+  @apply absolute bg-[#c8c8c8fc] h-3 w-full left-0 bottom-2 -z-10;
+  transition: 0.3s;
+}
+
+.footer-link:hover::after {
+  @apply h-5;
+}
+
+.navbar a:hover::after {
+  @apply w-full;
+}
+
+.heading-text {
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  @apply font-black leading-[0.8] uppercase transition duration-300;
+}
+
+.to-content {
+  @apply h-20 md:h-[4vw] w-1 mx-auto mt-16;
+  transition: 0.3s;
+  animation: 2s cubic-bezier(0.8, 0, 0.2, 1) 0s infinite normal none running;
+  animation-name: to-content;
+}
+
+#cards:hover > .project-card::after {
+  opacity: 1;
+}
+
+.project-card {
+  @apply h-[260px] w-full lg:w-[350px] bg-[rgba(255,255,255,0.2)] cursor-pointer relative hover:before:opacity-100 transition duration-300;
+}
+
+.project-card:hover {
+  @apply -translate-y-2;
+}
+
+.project-card::before, .project-card::after {
+  @apply absolute h-full w-full left-0 top-0 content-[""] z-10 opacity-0;
+  transition: opacity 500ms;
+}
+
+.project-card::before {
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40% 
+  );
+  z-index: 3;
+}
+
+.project-card::after {
+  background: radial-gradient(
+    400px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.3), transparent 40% 
+  );
+  z-index: 1;
+}
+
+.project-card > .card-content {
+  @apply absolute inset-[2px] bg-[rgba(23,23,23)] border-inherit z-[2] font-bebas;
+}
+
+@keyframes to-content {
+  0% {
+    transform-origin: 0% 0%;
+    transform: scale(1, 0);
+  }
+
+  50% {
+    transform-origin: 0% 0%;
+    transform: scale(1, 1);
+  }
+
+  50.001% {
+    transform-origin: 0% 100%;
+    transform: scale(1, 1);
+  }
+
+  100% {
+    transform-origin: 0% 100%;
+    transform: scale(1, 0);
+  }
+}
+
+
+.sidenav {
+  width: 100%;
+  position: fixed;
+  z-index: 997;
+  right: -100%;
+  overflow-x: hidden;
+  @apply h-screen bg-black pt-32;
+  transition: 0.6s;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    display: none;
+    transition: all 2s;
+  }
+  .active {
+    display: block;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+  }
+  .sideActive {
+    right: 0;
+  }
+  .sidenav a {
+    @apply mb-6 top-12 block;
+    text-decoration: none;
+  }
+}
+
+.navbar {
+  transition: all 1s;
+}
+
+/* ==========================================================================
+Loading Animation System by Neale Van Fleet from Rogue Amoeba
+========================================================================== */
+.animate {
+  animation-duration: 0.75s;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+  animation-name: animate-fade;
+  animation-timing-function: cubic-bezier(.26,.53,.74,1.48);
+  animation-fill-mode: backwards;
+}
+
+/* Fade In */
+.animate.fade {
+  animation-name: animate-fade;
+  animation-timing-function: ease;
+}
+@keyframes animate-fade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Pop In */
+.animate.pop {
+  animation-name: animate-pop;
+}
+@keyframes animate-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.5, 0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+}
+
+/* Blur In */
+.animate.blur {
+  animation-name: animate-blur;
+  animation-timing-function: ease;
+}
+@keyframes animate-blur {
+  0% {
+    opacity: 0;
+    filter: blur(15px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+/* Glow In */
+.animate.glow {
+  animation-name: animate-glow;
+  animation-timing-function: ease;
+}
+@keyframes animate-glow {
+  0% {
+    opacity: 0;
+    filter: brightness(3) saturate(3);
+    transform: scale(0.8, 0.8);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1) saturate(1);
+    transform: scale(1, 1);
+  }
+}
+
+/* Grow In */
+.animate.grow {
+  animation-name: animate-grow;
+}
+@keyframes animate-grow {
+  0% {
+    opacity: 0;
+    transform: scale(1, 0);
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+}
+
+/* Splat In */
+.animate.splat {
+animation-name: animate-splat;
+}
+@keyframes animate-splat {
+0% {
+opacity: 0;
+transform: scale(0, 0) rotate(20deg) translate(0, -30px);
+}
+70% {
+    opacity: 1;
+    transform: scale(1.1, 1.1) rotate(15deg);
+}
+
+85% {
+    opacity: 1;
+    transform: scale(1.1, 1.1) rotate(15deg) translate(0, -10px);
+}
+
+100% {
+    opacity: 1;
+    transform: scale(1, 1) rotate(0) translate(0, 0);
+}
+}
+
+/* Roll In */
+.animate.roll {
+animation-name: animate-roll;
+}
+@keyframes animate-roll {
+0% {
+opacity: 0;
+transform: scale(0, 0) rotate(360deg);
+}
+100% {
+    opacity: 1;
+    transform: scale(1, 1) rotate(0deg);
+}
+}
+
+/* Flip In */
+.animate.flip {
+animation-name: animate-flip;
+transform-style: preserve-3d;
+perspective: 1000px;
+}
+@keyframes animate-flip {
+0% {
+opacity: 0;
+transform: rotateX(-120deg) scale(0.9,0.9);
+}
+100% {
+    opacity: 1;
+    transform: rotateX(0deg) scale(1,1);
+}
+}
+
+/* Spin In */
+.animate.spin {
+animation-name: animate-spin;
+transform-style: preserve-3d;
+perspective: 1000px;
+}
+@keyframes animate-spin {
+0% {
+opacity: 0;
+transform: rotateY(-120deg) scale(0.9,0.9);
+}
+100% {
+    opacity: 1;
+    transform: rotateY(0deg) scale(1,1);
+}
+}
+
+/* Slide In */
+.animate.slide { animation-name: animate-slide; }
+@keyframes animate-slide {
+0% {
+opacity: 0;
+transform: translate(0,20px);
+}
+100% {
+    opacity: 1;
+    transform: translate(0,0);
+}
+}
+
+/* Drop In */
+.animate.drop { 
+animation-name: animate-drop; 
+animation-timing-function: cubic-bezier(.77,.14,.91,1.25);
+}
+@keyframes animate-drop {
+0% {
+opacity: 0;
+transform: translate(0,-300px) scale(0.9, 1.1);
+}
+95% {
+    opacity: 1;
+    transform: translate(0,0) scale(0.9, 1.1);
+}
+96% {
+    opacity: 1;
+    transform: translate(10px,0) scale(1.2, 0.9);
+}
+97% {
+    opacity: 1;
+    transform: translate(-10px,0) scale(1.2, 0.9);
+}
+98% {
+    opacity: 1;
+    transform: translate(5px,0) scale(1.1, 0.9);
+}
+99% {
+    opacity: 1;
+    transform: translate(-5px,0) scale(1.1, 0.9);
+}
+100% {
+    opacity: 1;
+    transform: translate(0,0) scale(1, 1);
+}
+}
+
+/* Animation Delays */
+.delay-1 {
+animation-delay: 0.6s;
+}
+.delay-2 {
+animation-delay: 0.7s;
+}
+.delay-3 {
+animation-delay: 0.8s;
+}
+.delay-4 {
+animation-delay: 0.9s;
+}
+.delay-5 {
+animation-delay: 1s;
+}
+.delay-6 {
+animation-delay: 1.1s;
+}
+.delay-7 {
+animation-delay: 1.2s;
+}
+.delay-8 {
+animation-delay: 1.3s;
+}
+.delay-9 {
+animation-delay: 1.4s;
+}
+.delay-10 {
+animation-delay: 1.5s;
+}
+.delay-11 {
+animation-delay: 1.6s;
+}
+.delay-12 {
+animation-delay: 1.7s;
+}
+.delay-13 {
+animation-delay: 1.8s;
+}
+.delay-14 {
+animation-delay: 1.9s;
+}
+.delay-15 {
+animation-delay: 2s;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .animate {
+    animation: none !important;
+  }
 }

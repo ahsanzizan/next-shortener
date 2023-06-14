@@ -7,16 +7,18 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        bebas: 'var(--font-bebas-neue)',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors: {
-        "main": "#00ADB5",
-        "secondary": "#EEEEEE",
+        "primary": "#000",
+        "secondary": "#fff",
       }
     },
   },
-  plugins: [],
 }
